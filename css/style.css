@@ -129,6 +129,7 @@ section{
 .btn{
     border-radius: 3rem;
     padding: 0.5rem 1.5rem;
+    color: black;
     border: 2px solid black;
     cursor: pointer;
     font-weight: 500;
@@ -199,9 +200,7 @@ section{
     color: #555;
 }
 .grid-card:hover{
-    transform: scale(1.02);
-    background-color: black;
-    color: white;
+    transform: scale(1.05);
 }
 .grid-card i{
     font-size: 1.5rem;
@@ -263,7 +262,7 @@ section{
     left: 50%;
     transform: translateX(-50%);
 
-    color: white;
+    color: black;
 
     padding: 5px 10px;
     border-radius: 8px;

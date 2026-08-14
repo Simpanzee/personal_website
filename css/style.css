@@ -240,6 +240,35 @@ section{
     text-align: center;
     color: var(--text);
 }
+
+.section-link-top{
+    position: absolute;
+    top: 8rem;
+    right: 5%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--cyan);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-wrap: nowrap;
+    transition: 0.2s ease-in-out;
+}
+.section-link-top:hover{
+    color: var(--magenta);
+}
+.section-link-top i{
+    font-size: 0.85rem;
+    transition: transform 0.2s ease-in-out;
+}
+.section-link-top:hover i{
+    transform: translateX(4px);
+}
+.section-link-top.back-arrow:hover i{
+    transform: translateX(-4px);
+}
 .skills-info{
     display: flex;
     align-items: center;
@@ -729,6 +758,13 @@ footer ul li a:hover{
 }
 
 @media(max-width:768px){
+    .section-link-top{
+        position: static;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    }
+
     header{
         padding: 1rem 1rem;
         gap: 1rem;

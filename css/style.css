@@ -591,6 +591,54 @@ footer ul li a:hover{
     50%, 100%{ opacity: 0; }
 }
 
+.reveal{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible{
+    opacity: 1;
+    transform: none;
+}
+
+.grid .reveal:nth-child(1){ transition-delay: 0s; }
+.grid .reveal:nth-child(2){ transition-delay: 0.08s; }
+.grid .reveal:nth-child(3){ transition-delay: 0.16s; }
+.grid .reveal:nth-child(4){ transition-delay: 0.24s; }
+
+.projects-grid .reveal:nth-child(1),
+.projects-grid-full .reveal:nth-child(1){ transition-delay: 0s; }
+.projects-grid .reveal:nth-child(2),
+.projects-grid-full .reveal:nth-child(2){ transition-delay: 0.08s; }
+.projects-grid .reveal:nth-child(3),
+.projects-grid-full .reveal:nth-child(3){ transition-delay: 0.16s; }
+.projects-grid .reveal:nth-child(4),
+.projects-grid-full .reveal:nth-child(4){ transition-delay: 0.24s; }
+
+.social-links .reveal:nth-child(2){ transition-delay: 0.1s; }
+
+.typewriter::after{
+    content: '|';
+    margin-left: 2px;
+    color: var(--cyan);
+    animation: blink 1s steps(1) infinite;
+}
+
+.nav-links a.active-link{
+    color: var(--cyan);
+}
+.nav-links a.active-link::before{
+    width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce){
+    .reveal{
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
 @media(max-width:1280px){
     header{
         padding: 1rem 2rem;

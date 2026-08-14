@@ -493,7 +493,6 @@ section{
     border: 1.5px solid var(--border);
     background: var(--surface);
     border-radius: 1.5rem;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -504,6 +503,7 @@ section{
     transform: translateY(-10px);
     background: var(--surface-hover);
     box-shadow: 0 16px 34px rgba(0,0,0,0.45);
+    z-index: 5;
 }
 
 .project-media{
@@ -511,6 +511,7 @@ section{
     aspect-ratio: 16 / 9;
     background: var(--bg-alt-solid);
     overflow: hidden;
+    border-radius: 1.5rem 1.5rem 0 0;
 }
 .project-media img,
 .project-media video,
@@ -563,14 +564,32 @@ section{
 }
 
 .project-desc{
+    position: relative;
     color: var(--text-muted);
     font-size: 0.95rem;
     line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    max-height: 6.4em;
     min-height: 6.4em;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+}
+.project-desc::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1.8em;
+    background: linear-gradient(to bottom, rgba(20,24,48,0), var(--surface));
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+.project-card:hover .project-desc{
+    max-height: 40em;
+}
+.project-card:hover .project-desc::after{
+    opacity: 0;
 }
 
 .project-links{

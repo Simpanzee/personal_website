@@ -59,6 +59,31 @@ if (sections.length && hashNavLinks.length) {
     sections.forEach(sec => navObserver.observe(sec));
 }
 
+// Project card descriptions: show a "scroll for more" hint only when a
+// description actually overflows its box, and hide it once scrolled to the bottom
+const descWraps = document.querySelectorAll('.project-desc-wrap');
+if (descWraps.length) {
+    descWraps.forEach(wrap => {
+        const desc = wrap.querySelector('.project-desc');
+        if (!desc) return;
+
+        const checkOverflow = () => {
+            const hasOverflow = desc.scrollHeight > desc.clientHeight + 1;
+            wrap.classList.toggle('has-overflow', hasOverflow);
+        };
+
+        const checkAtBottom = () => {
+            const atBottom = desc.scrollTop + desc.clientHeight >= desc.scrollHeight - 2;
+            wrap.classList.toggle('at-bottom', atBottom);
+        };
+
+        checkOverflow();
+        checkAtBottom();
+        desc.addEventListener('scroll', checkAtBottom);
+        window.addEventListener('resize', checkOverflow);
+    });
+}
+
 const projectsCarousel = document.querySelector('#projectsCarousel');
 const prevProjectBtn = document.querySelector('#prevProject');
 const nextProjectBtn = document.querySelector('#nextProject');

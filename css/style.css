@@ -454,11 +454,10 @@ section{
     flex: 1 1 0%;
     min-width: 0;
     gap: 2rem;
-    overflow-x: auto;
+    overflow: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     padding: 0.5rem;
-    scrollbar-width: none;
 }
 .projects-grid::-webkit-scrollbar{
     display: none;
@@ -493,6 +492,7 @@ section{
     border: 1.5px solid var(--border);
     background: var(--surface);
     border-radius: 1.5rem;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -503,7 +503,6 @@ section{
     transform: translateY(-10px);
     background: var(--surface-hover);
     box-shadow: 0 16px 34px rgba(0,0,0,0.45);
-    z-index: 5;
 }
 
 .project-media{
@@ -564,32 +563,76 @@ section{
 }
 
 .project-desc{
-    position: relative;
     color: var(--text-muted);
     font-size: 0.95rem;
     line-height: 1.6;
-    max-height: 6.4em;
-    min-height: 6.4em;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out;
+    height: 6.4em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 0.6rem;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cyan) var(--bg-alt-solid);
 }
-.project-desc::after{
+.project-desc::-webkit-scrollbar{
+    width: 6px;
+}
+.project-desc::-webkit-scrollbar-track{
+    background: var(--bg-alt-solid);
+    border-radius: 3px;
+}
+.project-desc::-webkit-scrollbar-thumb{
+    background: var(--cyan);
+    border-radius: 3px;
+}
+
+.project-desc-wrap{
+    position: relative;
+    width: 100%;
+}
+.project-desc-wrap::after{
     content: '';
     position: absolute;
     left: 0;
-    right: 0;
+    right: 0.6rem;
     bottom: 0;
-    height: 1.8em;
-    background: linear-gradient(to bottom, rgba(20,24,48,0), var(--surface));
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-    pointer-events: none;
-}
-.project-card:hover .project-desc{
-    max-height: 40em;
-}
-.project-card:hover .project-desc::after{
+    height: 1.6em;
+    background: linear-gradient(to bottom, rgba(10,12,22,0), rgba(10,12,22,0.9));
     opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease-in-out;
+    border-radius: 0 0 4px 4px;
+}
+.project-desc-wrap.has-overflow:not(.at-bottom)::after{
+    opacity: 1;
+}
+.scroll-hint{
+    position: absolute;
+    right: 0.1rem;
+    bottom: 0.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.3rem;
+    height: 1.3rem;
+    color: var(--cyan);
+    font-size: 0.7rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease-in-out;
+    animation: hint-bounce 1.6s ease-in-out infinite;
+}
+.project-desc-wrap.has-overflow:not(.at-bottom) .scroll-hint{
+    opacity: 0.9;
+}
+@keyframes hint-bounce{
+    0%, 100%{ transform: translateY(0); }
+    50%{ transform: translateY(3px); }
+}
+@media (prefers-reduced-motion: reduce){
+    .scroll-hint{
+        animation: none;
+    }
 }
 
 .project-links{
